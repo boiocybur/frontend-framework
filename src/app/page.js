@@ -1,4 +1,3 @@
-
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import BreedCard from "./components/BreedCard";
@@ -9,22 +8,15 @@ export default async function ListView() {
   const dogs = await getDogBreeds();
 
   // Vis kun hunde med billeder
-  const dogsWithImages = dogs.filter(
-    (dog) => dog.image?.url
-  );
+  const dogsWithImages = dogs.filter((dog) => dog.image?.url);
 
   // Del hundene op i to kolonner
-  const leftColumn = dogsWithImages.filter(
-    (_, index) => index % 2 === 0
-  );
+  const leftColumn = dogsWithImages.filter((_, index) => index % 2 === 0);
 
-  const rightColumn = dogsWithImages.filter(
-    (_, index) => index % 2 !== 0
-  );
+  const rightColumn = dogsWithImages.filter((_, index) => index % 2 !== 0);
 
   return (
     <main className="mx-auto min-h-screen max-w-md bg-white pb-28">
-
       {/* Header */}
       <Header />
 
@@ -36,7 +28,6 @@ export default async function ListView() {
       {/* Dog cards */}
       <section className="mt-6 px-5">
         <div className="grid grid-cols-2 items-start gap-4">
-
           {/* Left column */}
           <div className="flex flex-col gap-4">
             {leftColumn.map((dog, index) => (
@@ -46,7 +37,7 @@ export default async function ListView() {
                 name={dog.name}
                 origin={dog.origin || "Unknown"}
                 image={dog.image.url}
-                height={index % 2 === 0 ? 160 : 210}
+                height={index % 2 === 0 ? 110 : 120}
               />
             ))}
           </div>
@@ -60,14 +51,12 @@ export default async function ListView() {
                 name={dog.name}
                 origin={dog.origin || "Unknown"}
                 image={dog.image.url}
-                height={index % 2 === 0 ? 210 : 160}
+                height={index % 2 === 0 ? 110 : 140}
               />
             ))}
           </div>
-
         </div>
       </section>
-
     </main>
   );
 }

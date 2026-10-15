@@ -1,14 +1,8 @@
-
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  FiHome,
-  FiHeart,
-  FiSearch,
-  FiUser,
-} from "react-icons/fi";
+import { FiHome, FiHeart, FiSearch, FiUser } from "react-icons/fi";
 
 export default function BottomNavigation() {
   const pathname = usePathname();
@@ -24,16 +18,14 @@ export default function BottomNavigation() {
     <nav
       aria-label="Main navigation"
       className="fixed bottom-0 left-0 z-50 w-full
-                 border-t border-gray-100 bg-white
-                 pb-[env(safe-area-inset-bottom)]"
+           bg-white/95 shadow-[0_-8px_30px_rgba(0,0,0,0.08)]
+           backdrop-blur-md
+           pb-[env(safe-area-inset-bottom)]"
     >
       <div className="mx-auto flex max-w-md items-center justify-around px-4 py-4">
         {navigation.map((item) => {
           const Icon = item.icon;
-          const isActive =
-            item.href === "/"
-              ? pathname === "/"
-              : false;
+          const isActive = item.href === "/" ? pathname === "/" : false;
 
           return (
             <Link
@@ -46,16 +38,9 @@ export default function BottomNavigation() {
                 focus-visible:outline-2
                 focus-visible:outline-offset-2
                 focus-visible:outline-coral
-                ${
-                  isActive
-                    ? "text-coral"
-                    : "text-gray-400"
-                }`}
+                ${isActive ? "text-coral" : "text-gray-400"}`}
             >
               <Icon className="text-2xl" />
-              <span className="text-xs">
-                {item.name}
-              </span>
             </Link>
           );
         })}

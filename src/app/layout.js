@@ -1,5 +1,7 @@
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import BottomNavigation from "./components/BottomNavigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +27,7 @@ export default function RootLayout({ children }) {
     >
       <body className="flex min-h-full flex-col">
         {children}
+        <BottomNavigation />
       </body>
     </html>
   );
