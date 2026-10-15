@@ -1,12 +1,12 @@
-// Statiske eksempeldata: ingen API-kald eller API-nøgle er nødvendig.
-// Billed-URL'er er faste; billederne hostes stadig eksternt.
+// Statiske hundedata med lokale billeder fra Figma.
+// Læg de seks PNG-filer i public/dogs/.
 export const dogs = [
   {
     "id": 1,
     "name": "Affenpinscher",
-    "origin": "Germany",
-    "image": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
-    "temperament": "Confident, Alert, Playful, Loyal, Curious",
+    "origin": "Northern, Germany",
+    "image": "/dogs/affenpinscher.png",
+    "temperament": "Confident, Alert, Playful, Loyal",
     "life_span": "10 - 12 years",
     "weight": {
       "metric": "3 - 6"
@@ -17,8 +17,8 @@ export const dogs = [
     "id": 2,
     "name": "Afghan Hound",
     "origin": "Afghanistan",
-    "image": "https://cdn2.thedogapi.com/images/hMyT4CDXR.jpg",
-    "temperament": "Aloof, Clownish, Dignified, Independent",
+    "image": "/dogs/afghan-hound.png",
+    "temperament": "Independent, Dignified, Playful, Loyal",
     "life_span": "10 - 13 years",
     "weight": {
       "metric": "23 - 27"
@@ -27,33 +27,21 @@ export const dogs = [
   },
   {
     "id": 3,
-    "name": "African Hunting Dog",
-    "origin": "Sub-Saharan Africa",
-    "image": "https://cdn2.thedogapi.com/images/rkiByec47.jpg",
-    "temperament": "Wild, Hardworking, Dutiful",
-    "life_span": "11 years",
-    "weight": {
-      "metric": "20 - 30"
-    },
-    "bred_for": "Hunting"
-  },
-  {
-    "id": 4,
     "name": "Airedale Terrier",
-    "origin": "England",
-    "image": "https://cdn2.thedogapi.com/images/1-7cgoZSh.jpg",
-    "temperament": "Outgoing, Friendly, Alert, Confident, Intelligent",
+    "origin": "Yorkshire, England",
+    "image": "/dogs/airedale-terrier.png",
+    "temperament": "Confident, Intelligent, Courageous, Alert",
     "life_span": "10 - 13 years",
     "weight": {
       "metric": "18 - 29"
     },
-    "bred_for": "Badger, otter hunting"
+    "bred_for": "Badger and otter hunting"
   },
   {
-    "id": 5,
-    "name": "Akbash Dog",
-    "origin": "Turkey",
-    "image": "https://cdn2.thedogapi.com/images/26pHT3Qk7.jpg",
+    "id": 4,
+    "name": "Akbash",
+    "origin": "Western Turkey",
+    "image": "/dogs/akbash.png",
     "temperament": "Loyal, Independent, Intelligent, Brave",
     "life_span": "10 - 12 years",
     "weight": {
@@ -62,16 +50,28 @@ export const dogs = [
     "bred_for": "Livestock guarding"
   },
   {
+    "id": 5,
+    "name": "American Eskimo Dog",
+    "origin": "Germany",
+    "image": "/dogs/american-eskimo.png",
+    "temperament": "Friendly, Alert, Intelligent, Playful",
+    "life_span": "12 - 15 years",
+    "weight": {
+      "metric": "8 - 16"
+    },
+    "bred_for": "Companionship"
+  },
+  {
     "id": 6,
     "name": "Akita",
     "origin": "Japan",
-    "image": "https://cdn2.thedogapi.com/images/BJT0Jx5Nm.jpg",
+    "image": "/dogs/akita.png",
     "temperament": "Docile, Alert, Responsive, Dignified",
     "life_span": "10 - 14 years",
     "weight": {
       "metric": "29 - 52"
     },
-    "bred_for": "Hunting bears"
+    "bred_for": "Hunting"
   }
 ];
 
