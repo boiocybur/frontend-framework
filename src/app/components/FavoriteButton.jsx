@@ -1,20 +1,57 @@
 "use client";
 
-import { FiStar } from "react-icons/fi";
-import { useFavorites } from "../store/useFavorites";
+import { useState } from "react";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
-export default function FavoriteButton({ imageId }) {
-  const isFavorite = useFavorites((state) => state.favorites.some((favorite) => favorite.image_id === imageId));
-  const loading = useFavorites((state) => state.loading);
-  const pending = useFavorites((state) => state.pendingIds.includes(imageId));
-  const toggleFavorite = useFavorites((state) => state.toggleFavorite);
+const Favorite = ({ id, breed }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const addFavorite = async () => {
+    if (isLoading || isFavorite) return;
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/favourites", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          image_id: id,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add favorite");
+      }
+
+      setIsFavorite(true);
+      console.log("Favorite added:", breed);
+    } catch (error) {
+      console.error("Error adding favorite:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <button type="button" aria-label={isFavorite ? "Remove favorite" : "Add favorite"}
-      aria-pressed={isFavorite} disabled={!imageId || loading || pending}
-      onClick={() => toggleFavorite(imageId)}
-      className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white/60 text-gray-800 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-coral">
-      <FiStar className={isFavorite ? "fill-coral text-coral" : "text-gray-800"} />
+    <button
+      type="button"
+      onClick={addFavorite}
+      disabled={isLoading}
+      aria-label={isFavorite ? "Favorite added" : "Add favorite"}
+      aria-pressed={isFavorite}
+      className="cursor-pointer absolute top-3 right-3 text-white disabled:opacity-50"
+    >
+      {isFavorite ? (
+        <MdFavorite size={25} />
+      ) : (
+        <MdFavoriteBorder size={25} />
+      )}
     </button>
   );
-}
+};
+
+export default Favorite;
