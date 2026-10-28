@@ -1,10 +1,15 @@
-import { Suspense } from "react";
 import DetailContent from "../../components/DetailContent";
+import { getDogBreed } from "../../dogapi";
 
-export default function DetailView() {
-  return (
-    <Suspense fallback={<main className="mx-auto min-h-screen max-w-md bg-white pb-28" />}>
-      <DetailContent />
-    </Suspense>
-  );
+export default async function DetailView({ searchParams }) {
+  const { id } = await searchParams;
+  let dog = null;
+  if (id) {
+    try {
+      dog = await getDogBreed(id);
+    } catch (error) {
+      console.error("Could not load breed:", error);
+    }
+  }
+  return <DetailContent dog={dog} />;
 }
