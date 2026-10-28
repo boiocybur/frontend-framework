@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-import { useFavorites } from "../store/useFavorites";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiHome, FiHeart, FiSearch, FiUser } from "react-icons/fi";
 
 export default function BottomNavigation() {
   const pathname = usePathname();
-  useEffect(() => { useFavorites.persist.rehydrate(); }, []);
   const navigation = [
     { name: "Home", href: "/", icon: FiHome },
     { name: "Search", href: "/#search", icon: FiSearch },

@@ -34,6 +34,7 @@ export default async function ListView() {
               <BreedCard
                 key={dog.id}
                 id={dog.id}
+                imageId={dog.image.id}
                 name={dog.name}
                 origin={dog.origin || "Unknown"}
                 image={dog.image.url}
