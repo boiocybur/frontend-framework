@@ -1,36 +1,47 @@
+
 "use client";
 
 import { useState } from "react";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import {
+  addFavorite,
+  removeFavorite,
+} from "../actions/favorites";
 
-const Favorite = ({ id, breed }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+export default function FavoriteButton({
+  id,
+  breed,
+  initialFavoriteId = null,
+}) {
+  const [favoriteId, setFavoriteId] = useState(initialFavoriteId);
   const [isLoading, setIsLoading] = useState(false);
 
-  const addFavorite = async () => {
-    if (isLoading || isFavorite) return;
+  const isFavorite = favoriteId !== null;
+
+  const handleFavorite = async () => {
+    if (isLoading) return;
 
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/favourites", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          image_id: id,
-        }),
-      });
+      if (isFavorite) {
+        await removeFavorite(favoriteId);
+        setFavoriteId(null);
+      } else {
+        const favorites = await addFavorite(id);
 
-      if (!response.ok) {
-        throw new Error("Failed to add favorite");
+        const added = favorites.find(
+          (favorite) => favorite.image_id === id
+        );
+
+        if (!added) {
+          throw new Error("Favorite was not found");
+        }
+
+        setFavoriteId(added.id);
       }
-
-      setIsFavorite(true);
-      console.log("Favorite added:", breed);
     } catch (error) {
-      console.error("Error adding favorite:", error);
+      console.error("Favorite error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -39,11 +50,14 @@ const Favorite = ({ id, breed }) => {
   return (
     <button
       type="button"
-      onClick={addFavorite}
+      onClick={handleFavorite}
       disabled={isLoading}
-      aria-label={isFavorite ? "Favorite added" : "Add favorite"}
+      aria-label={
+        isFavorite ? "Remove favorite" : "Add favorite"
+      }
       aria-pressed={isFavorite}
-      className="cursor-pointer absolute top-3 right-3 text-white disabled:opacity-50"
+      title={breed}
+      className="absolute top-3 right-3 z-10 cursor-pointer text-white disabled:opacity-50"
     >
       {isFavorite ? (
         <MdFavorite size={25} />
@@ -52,6 +66,4 @@ const Favorite = ({ id, breed }) => {
       )}
     </button>
   );
-};
-
-export default Favorite;
+}
