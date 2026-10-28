@@ -1,15 +1,9 @@
 import DetailContent from "../../components/DetailContent";
-import { getDogBreed } from "../../dogapi";
+import { getDogBreeds } from "../../dogapi";
 
 export default async function DetailView({ searchParams }) {
   const { id } = await searchParams;
-  let dog = null;
-  if (id) {
-    try {
-      dog = await getDogBreed(id);
-    } catch (error) {
-      console.error("Could not load breed:", error);
-    }
-  }
+  const breeds = await getDogBreeds();
+  const dog = breeds.find((breed) => String(breed.id) === String(id)) || null;
   return <DetailContent dog={dog} />;
 }
