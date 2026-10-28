@@ -15,7 +15,7 @@ export default function BreedCard({ id, name, origin, image, height = 110 }) {
           <p className="mt-1 text-xs leading-tight text-gray-400">{origin}</p>
         </div>
       </Link>
-      <FavoriteButton id={id} />
+      <FavoriteButton imageId={imageId} />
     </article>
   );
 }
