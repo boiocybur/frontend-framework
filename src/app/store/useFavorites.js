@@ -17,6 +17,6 @@ export const useFavorites = create(
         };
       }),
     }),
-    { name: "family-friends-favorites" }
+    { name: "family-friends-favorites", skipHydration: true }
   )
 );
