@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BreedBadge from "./BreedBadge";
@@ -7,6 +8,7 @@ import Header from "./Header";
 import FavoriteButton from "./FavoriteButton";
 
 export default function DetailContent({ dog }) {
+  const [imageFailed, setImageFailed] = useState(false);
   if (!dog) {
     return (
       <main className="mx-auto max-w-md p-5">
@@ -16,18 +18,21 @@ export default function DetailContent({ dog }) {
       </main>
     );
   }
-
   const traits = dog.temperament ? dog.temperament.split(",").map((trait) => trait.trim()) : [];
   const colors = ["blue", "pink", "green", "yellow"];
-
+  const imageUrl = dog.image?.url;
+  const validImage = typeof imageUrl === "string" && imageUrl.startsWith("https://");
   return (
     <main className="mx-auto min-h-screen max-w-md bg-white pb-28">
       <Header />
       <div className="relative mx-5 mt-6 h-[340px] overflow-hidden rounded-[28px] bg-gray-100">
-        {dog.image?.url && (
-          <Image src={dog.image.url} alt={dog.name} fill
+        {validImage && !imageFailed ? (
+          <Image src={imageUrl} alt={dog.name} fill unoptimized
             sizes="(max-width: 448px) 100vw, 448px"
-            className="object-cover object-[center_35%]" priority />
+            className="object-cover object-[center_35%]" priority
+            onError={() => setImageFailed(true)} />
+        ) : (
+          <div className="flex h-full items-center justify-center text-gray-500">Image unavailable</div>
         )}
         <Link href="/" aria-label="Back to breeds"
           className="absolute left-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white text-xl text-gray-800 focus-visible:outline-2 focus-visible:outline-coral">←</Link>
