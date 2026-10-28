@@ -1,0 +1,23 @@
+# Echo API / REST Client requests for The Dog API
+# Set a private environment variable for your key; never commit a real key.
+@base = https://api.thedogapi.com/v1
+@apiKey = {{$processEnv THEDOGAPI_KEY}}
+
+### Get breeds
+GET {{base}}/breeds?limit=20
+x-api-key: {{apiKey}}
+
+### Get saved favorites
+GET {{base}}/favourites
+x-api-key: {{apiKey}}
+
+### Add favorite (replace with a real image ID)
+POST {{base}}/favourites
+x-api-key: {{apiKey}}
+Content-Type: application/json
+
+{"image_id":"REPLACE_WITH_IMAGE_ID"}
+
+### Remove favorite (replace with the ID returned by GET /favourites)
+DELETE {{base}}/favourites/REPLACE_WITH_FAVORITE_ID
+x-api-key: {{apiKey}}
