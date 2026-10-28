@@ -8,7 +8,7 @@ export async function getDogBreeds() {
     throw new Error("Missing THEDOGAPI_KEY in .env.local");
   }
 
-  const response = await fetch(`${API_URL}/breeds?limit=20`, {
+  const response = await fetch(`${API_URL}/breeds?limit=200`, {
     headers: {
       "x-api-key": apiKey,
       Accept: "application/json",

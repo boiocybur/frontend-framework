@@ -48,7 +48,7 @@ export default async function DetailView({ searchParams }) {
         </Link>
 
         {/* Favorite button */}
-        <FavoriteButton />
+        <FavoriteButton id={dog.id} />
 
         {/* Dog name overlay */}
         <div className="absolute bottom-5 left-5 rounded-full bg-white/60 px-4 py-2 backdrop-blur-sm">
