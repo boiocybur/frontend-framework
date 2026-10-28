@@ -1,24 +1,31 @@
 "use client";
 
-import { useState } from "react";
-import { FiStar } from "react-icons/fi";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import { useFavorites } from "../store/useFavorites";
 
-export default function FavoriteButton() {
-  const [isFavorite, setIsFavorite] = useState(false);
+export default function FavoriteButton({ id, breed }) {
+  const favorites = useFavorites((state) => state.favorites);
+  const loading = useFavorites((state) => state.loading);
+  const pendingIds = useFavorites((state) => state.pendingIds);
+  const toggleFavorite = useFavorites((state) => state.toggleFavorite);
+
+  if (!id) return null;
+
+  const isFavorite = favorites.some((favorite) => favorite.image_id === id);
+
+  const isPending = pendingIds.includes(id);
 
   return (
     <button
       type="button"
+      onClick={() => toggleFavorite(id)}
+      disabled={loading || isPending}
       aria-label={isFavorite ? "Remove favorite" : "Add favorite"}
       aria-pressed={isFavorite}
-      onClick={() => setIsFavorite(!isFavorite)}
-      className="absolute right-2 top-2 z-10
-           flex h-7 w-7 items-center justify-center
-           rounded-full bg-white/40 text-white
-           focus-visible:outline-2
-           focus-visible:outline-coral"
+      title={breed}
+      className="absolute top-3 right-3 z-10 cursor-pointer text-white disabled:opacity-50"
     >
-      <FiStar className={isFavorite ? "fill-white text-white" : "text-white"} />
+      {isFavorite ? <MdFavorite size={25} /> : <MdFavoriteBorder size={25} />}
     </button>
   );
 }

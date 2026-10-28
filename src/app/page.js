@@ -17,16 +17,28 @@ export default function ListView() {
         <div className="grid grid-cols-2 items-start gap-4">
           <div className="flex flex-col gap-4">
             {leftColumn.map((dog, index) => (
-              <BreedCard key={dog.id} id={dog.id} name={dog.name}
-                origin={dog.origin} image={dog.image}
-                height={index % 2 === 0 ? 110 : 120} />
+              <BreedCard
+                key={dog.id}
+                id={dog.id}
+                imageId={dog.image?.id}
+                name={dog.name}
+                origin={dog.origin || "Unknown"}
+                image={dog.image.url}
+                height={index % 2 === 0 ? 110 : 120}
+              />
             ))}
           </div>
           <div className="flex flex-col gap-4">
             {rightColumn.map((dog, index) => (
-              <BreedCard key={dog.id} id={dog.id} name={dog.name}
-                origin={dog.origin} image={dog.image}
-                height={index % 2 === 0 ? 110 : 140} />
+              <BreedCard
+                key={dog.id}
+                id={dog.id}
+                imageId={dog.image?.id}
+                name={dog.name}
+                origin={dog.origin || "Unknown"}
+                image={dog.image.url}
+                height={index % 2 === 0 ? 110 : 140}
+              />
             ))}
           </div>
         </div>

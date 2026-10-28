@@ -5,6 +5,7 @@ import FavoriteButton from "./FavoriteButton";
 
 export default function BreedCard({
   id,
+  imageId,
   name,
   origin,
   image,
@@ -41,14 +42,15 @@ export default function BreedCard({
           <h2 className="wrap-break-word text-sm font-semibold leading-tight text-gray-800">
             {name}
           </h2>
-
           <p className="mt-1 text-xs leading-tight text-gray-400">
             {origin}
           </p>
         </div>
       </Link>
 
-      <FavoriteButton />
+      {imageId && (
+        <FavoriteButton id={imageId} breed={name} />
+      )}
     </article>
   );
 }
